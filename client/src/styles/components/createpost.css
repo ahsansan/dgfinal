@@ -1,0 +1,56 @@
+.create-post-container {
+    width: 90%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-upload-photo-button {
+    background-color: white;
+    background-image: linear-gradient(90deg, #4DD4F7 0%, #9090FB 36.46%, #FF6B81 71.35%, #FBDF63 100%);
+    padding-top: 15px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 0px;
+    text-align: center;
+    border: 0px solid black;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 17px;
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    width: 250px;
+}
+
+.caption-textarea {
+    background-color: #D2D2D240;
+    border: 2px solid #D2D2D2;
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 17px;
+    color: #B1B1B1;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    resize:none; height: 200px;
+}
+
+.upload-button-container {
+    display: flex;
+    justify-content: end;
+}
+
+.upload-button {
+    background-color: white;
+    background-image: linear-gradient(90deg, #4DD4F7 0%, #9090FB 36.46%, #FF6B81 71.35%, #FBDF63 100%);
+    padding: 15px 30px;
+    border: 0px solid black;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 17px;
+    color: white;
+    margin-top: 20px;
+}
