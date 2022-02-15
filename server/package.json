@@ -2,7 +2,7 @@
   "name": "be-dumbgram",
   "version": "1.0.0",
   "description": "BackEnd for dumbgram",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "client": "npm start --prefix ../client",
