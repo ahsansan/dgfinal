@@ -62,6 +62,15 @@ function Notification() {
               </div>
             </div>
           ))}
+          {notif.length === 0 ? (
+            <div className="notif-kosong">
+              <div className="no-notif">
+                <p>no recent notification for you</p>
+              </div>
+            </div>
+          ) : (
+            <center></center>
+          )}
         </div>
       </Modal>
     </div>

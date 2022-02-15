@@ -60,3 +60,16 @@
   font-size: 14px;
   color: #ababab;
 }
+
+.no-notif {
+  font-size: 15px;
+  color: white;
+}
+
+.notif-kosong {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
