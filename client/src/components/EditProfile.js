@@ -114,7 +114,7 @@ function EditProfile() {
           <img src={image} className="img-fluid rounded" width="15%" />
         )}
         <div>
-          <label for="input-photo" className="profile-upload-photo-button">
+          <label htmlFor="input-photo" className="profile-upload-photo-button">
             <p>Upload Photos</p>
           </label>
           <input
@@ -160,7 +160,7 @@ function EditProfile() {
         </div>
         <div className="save-button-container">
           <button type="submit" className="save-button">
-            Save
+            Save Profile
           </button>
         </div>
       </form>

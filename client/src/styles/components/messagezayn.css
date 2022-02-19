@@ -1,7 +1,7 @@
 .detail-dm-container {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
   height: 70vh;

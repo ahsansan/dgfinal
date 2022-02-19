@@ -21,7 +21,7 @@ function CreatePost() {
 
   // useSate
   const [state, dispatch] = useContext(UserContext);
-  const user = parseInt(`${state.user.id}`);
+  parseInt(`${state.user.id}`);
 
   // form pertama kali di load
   const [preview, setPreview] = useState("");
@@ -43,7 +43,6 @@ function CreatePost() {
     if (e.target.type === "file") {
       let url = URL.createObjectURL(e.target.files[0]);
       setPreview(url);
-      console.log(url);
     }
   };
 

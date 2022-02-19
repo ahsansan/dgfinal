@@ -60,7 +60,7 @@ a {
   flex: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .nama-uploader {
@@ -82,7 +82,7 @@ a {
 .detail-komen {
   display: flex;
   flex-direction: inline;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .foto-komen {
@@ -100,7 +100,7 @@ a {
   flex: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .nama-komen {

@@ -52,7 +52,7 @@
 .icon-container {
   flex: 1;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   padding-right: 15px;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .navlike {
-  text-align: end;
+  text-align: right;
   padding-right: 15px;
 }
 

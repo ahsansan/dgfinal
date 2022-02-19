@@ -31,7 +31,7 @@ function FeedProfile() {
     Aos.init({ duration: 1000 });
   }, []);
   // Detail Feed Modal
-  const [state, dispatch] = useContext(UserContext);
+  const [state] = useContext(UserContext);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -73,7 +73,7 @@ function FeedProfile() {
       const headers = {
         headers: { "Content-Type": "application/json" },
       };
-      const response = await API.post("/like", body, headers);
+      await API.post("/like", body, headers);
 
       showFeedFollow();
       loadLike();
@@ -150,7 +150,7 @@ function FeedProfile() {
             </div>
             <div className="navlike">
               <div>
-                <p className="like-total">{feed.like} Like</p>
+                <p className="like-total">{likeUser.length} Like</p>
               </div>
             </div>
           </div>

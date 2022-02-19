@@ -36,7 +36,7 @@
 .nav-right-menu {
   display: flex;
   flex-direction: inline;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .nav-right-menu ul {

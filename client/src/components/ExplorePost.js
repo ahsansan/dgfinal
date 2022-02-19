@@ -6,11 +6,10 @@ import "../styles/components/explore.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
 // Hooks
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 // Detail Feed
 import DetailFeed from "./DetailFeed";
 // API and Context
-import { UserContext } from "../context/userContext";
 import { API } from "../config/api";
 // path
 const path = "http://localhost:5000/uploads/";
@@ -21,7 +20,6 @@ function ExplorePost() {
     Aos.init({ duration: 1000 });
   }, []);
   // Detail Feed Modal
-  const [state, dispatch] = useContext(UserContext);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
