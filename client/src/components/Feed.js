@@ -155,7 +155,7 @@ function Feed() {
             </div>
             <div className="navlike">
               <div>
-                <p className="like-total">{likeUser.length} Like</p>
+                <p className="like-total">{feed.like} Like</p>
               </div>
             </div>
           </div>
