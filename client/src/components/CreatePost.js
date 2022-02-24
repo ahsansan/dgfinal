@@ -88,7 +88,7 @@ function CreatePost() {
         }}
       >
         {preview && (
-          <img src={preview} className="img-fluid rounded" width="20%" />
+          <img src={preview} className="img-fluid rounded" width="40%" />
         )}
         <div>
           <label for="input-photo-video" className="post-upload-photo-button">
