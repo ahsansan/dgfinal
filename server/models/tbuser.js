@@ -39,12 +39,6 @@ module.exports = (sequelize, DataTypes) => {
           name: "idReceiver",
         },
       });
-      tbUser.hasMany(models.tbNotification, {
-        as: "receiverNotif",
-        foreignKey: {
-          name: "idReceiver",
-        },
-      });
     }
   }
   tbUser.init(

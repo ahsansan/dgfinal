@@ -37,24 +37,12 @@ const socketIo = (io) => {
           include: [
             {
               model: tbMessage,
-              as: "receiverMessage",
-              where: {
-                [Op.or]: [{ idSender: idUser }, { idReceiver: idUser }],
-              },
-              attributes: {
-                exclude: ["createdAt", "updatedAt", "idRecipient", "idSender"],
-              },
-            },
-          ],
-          include: [
-            {
-              model: tbMessage,
               as: "senderMessage",
               where: {
                 [Op.or]: [{ idSender: idUser }, { idReceiver: idUser }],
               },
               attributes: {
-                exclude: ["createdAt", "updatedAt", "idRecipient", "idSender"],
+                exclude: ["createdAt", "updatedAt", "idReceiver", "idSender"],
               },
             },
           ],

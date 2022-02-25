@@ -42,7 +42,7 @@ function FeedProfile() {
   const showFeedFollow = async () => {
     try {
       const response = await API.get(`/feedscount/${id}`);
-      setFeeds(response.data.data.feeds); // id follow
+      setFeeds(response.data.data.feeds);
     } catch (error) {
       console.log(error);
     }
@@ -93,77 +93,93 @@ function FeedProfile() {
   }, []);
 
   return (
-    <div data-aos="fade-up">
-      <Masonry columnsCount={3}>
-        {feeds.map((feed) => (
-          <div
-            className="feed-container"
-            key={feed.id}
-            onClick={() => setFeedId(feed)}
-          >
-            <div className="feed-gambar">
-              <img
-                alt="Gambar Feed"
-                src={process.env.PUBLIC_URL + path + `${feed.fileName}`}
-                onClick={handleShow}
-                className="images-feed"
-              />
-            </div>
-            <div className="feed-keterangan">
-              <div className="prof-box">
-                <div className="profile">
+    <div>
+      {feeds.length > 0 ? (
+        <div data-aos="fade-up">
+          <Masonry columnsCount={3}>
+            {feeds.map((feed) => (
+              <div
+                className="feed-container"
+                key={feed.id}
+                onClick={() => setFeedId(feed)}
+              >
+                <div className="feed-gambar">
                   <img
-                    src={process.env.PUBLIC_URL + path + `${feed.user.image}`}
-                    className="card-profiles"
-                    alt="pp"
-                  />
-                  <p className="post-name">
-                    <Link to={`/profile/${feed.user.id}`}>
-                      {feed.user.username}
-                    </Link>
-                  </p>
-                </div>
-                <div className="icon-container">
-                  {feed.like ? (
-                    <FontAwesomeIcon
-                      className="card-icon text-danger"
-                      onClick={handleLike}
-                      icon={faHeart}
-                      content={feed.id}
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      className="card-icon"
-                      onClick={handleLike}
-                      icon={faHeart}
-                      content={feed.id}
-                    />
-                  )}
-                  <FontAwesomeIcon
-                    className="card-icon"
-                    icon={faComment}
+                    alt="Gambar Feed"
+                    src={process.env.PUBLIC_URL + path + `${feed.fileName}`}
                     onClick={handleShow}
+                    className="images-feed"
                   />
-                  <FontAwesomeIcon className="card-icon" icon={faPaperPlane} />
+                </div>
+                <div className="feed-keterangan">
+                  <div className="prof-box">
+                    <div className="profile">
+                      <img
+                        src={
+                          process.env.PUBLIC_URL + path + `${feed.user.image}`
+                        }
+                        className="card-profiles"
+                        alt="pp"
+                      />
+                      <p className="post-name">
+                        <Link to={`/profile/${feed.user.id}`}>
+                          {feed.user.username}
+                        </Link>
+                      </p>
+                    </div>
+                    <div className="icon-container">
+                      {feed.like ? (
+                        <FontAwesomeIcon
+                          className="card-icon text-danger"
+                          onClick={handleLike}
+                          icon={faHeart}
+                          content={feed.id}
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          className="card-icon"
+                          onClick={handleLike}
+                          icon={faHeart}
+                          content={feed.id}
+                        />
+                      )}
+                      <FontAwesomeIcon
+                        className="card-icon"
+                        icon={faComment}
+                        onClick={handleShow}
+                      />
+                      <FontAwesomeIcon
+                        className="card-icon"
+                        icon={faPaperPlane}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="navlike">
+                  <div>
+                    <p className="like-total">{feed.like} Like</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="navlike">
-              <div>
-                <p className="like-total">{feed.like} Like</p>
-              </div>
-            </div>
+            ))}
+            <DetailFeed
+              show={show}
+              handleClose={handleClose}
+              feedsId={feedsId}
+              showFeedFollow={showFeedFollow}
+            />
+            <br />
+            <br />
+          </Masonry>
+        </div>
+      ) : (
+        <div className="feed-kosong">
+          <div className="nopost" data-aos="fade-up">
+            <h3>No Post</h3>
+            <p className="childnopost">you don't have any post</p>
           </div>
-        ))}
-        <DetailFeed
-          show={show}
-          handleClose={handleClose}
-          feedsId={feedsId}
-          showFeedFollow={showFeedFollow}
-        />
-        <br />
-        <br />
-      </Masonry>
+        </div>
+      )}
     </div>
   );
 }

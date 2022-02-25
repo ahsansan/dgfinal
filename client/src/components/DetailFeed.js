@@ -11,6 +11,8 @@ import {
   faHeart,
   faPaperPlane,
 } from "@fortawesome/free-regular-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
 // React Router Dom
 import { Link } from "react-router-dom";
 // Components
@@ -21,6 +23,12 @@ const path = "http://localhost:5000/uploads/";
 function DetailFeed({ show, handleClose, feedsId, showFeedFollow }) {
   const [state] = useContext(UserContext);
   const [comments, setComments] = useState([]);
+
+  const deleteFeed = async () => {
+    await API.delete(`feed/${feedsId.id}`);
+    showFeedFollow();
+    handleClose();
+  };
 
   // load comment
   const loadComments = async () => {
@@ -208,37 +216,78 @@ function DetailFeed({ show, handleClose, feedsId, showFeedFollow }) {
                 ))}
               </div>
               <div className="reaction-container">
-                <div className="icon-icon">
-                  {likes ? (
-                    <FontAwesomeIcon
-                      className="card-icon text-danger"
-                      onClick={handleLike}
-                      icon={faHeart}
-                      content={feedsId.id}
-                      size="lg"
-                    />
-                  ) : (
+                {feedsId.user.id === state.user.id ? (
+                  <div className="icon-icon">
+                    {likes ? (
+                      <FontAwesomeIcon
+                        className="card-icon text-danger"
+                        onClick={handleLike}
+                        icon={faHeart}
+                        content={feedsId.id}
+                        size="lg"
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        className="card-icon"
+                        onClick={handleLike}
+                        icon={faHeart}
+                        content={feedsId.id}
+                        size="lg"
+                      />
+                    )}
+                    <label htmlFor="comment">
+                      <FontAwesomeIcon
+                        className="card-icon"
+                        icon={faComment}
+                        size="lg"
+                      />
+                    </label>
                     <FontAwesomeIcon
                       className="card-icon"
-                      onClick={handleLike}
-                      icon={faHeart}
-                      content={feedsId.id}
+                      icon={faPaperPlane}
                       size="lg"
                     />
-                  )}
-                  <label htmlFor="comment">
                     <FontAwesomeIcon
                       className="card-icon"
-                      icon={faComment}
+                      icon={faTrashAlt}
+                      size="lg"
+                      style={{ color: "red" }}
+                      onClick={deleteFeed}
+                    />
+                  </div>
+                ) : (
+                  <div className="icon-icon">
+                    {likes ? (
+                      <FontAwesomeIcon
+                        className="card-icon text-danger"
+                        onClick={handleLike}
+                        icon={faHeart}
+                        content={feedsId.id}
+                        size="lg"
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        className="card-icon"
+                        onClick={handleLike}
+                        icon={faHeart}
+                        content={feedsId.id}
+                        size="lg"
+                      />
+                    )}
+                    <label htmlFor="comment">
+                      <FontAwesomeIcon
+                        className="card-icon"
+                        icon={faComment}
+                        size="lg"
+                      />
+                    </label>
+                    <FontAwesomeIcon
+                      className="card-icon"
+                      icon={faPaperPlane}
                       size="lg"
                     />
-                  </label>
-                  <FontAwesomeIcon
-                    className="card-icon"
-                    icon={faPaperPlane}
-                    size="lg"
-                  />
-                </div>
+                  </div>
+                )}
                 <div className="likers">
                   <p>{feedsId.like} Like</p>
                 </div>

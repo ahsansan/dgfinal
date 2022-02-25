@@ -14,7 +14,7 @@ import {
   faCompass,
 } from "@fortawesome/free-solid-svg-icons";
 // React Router Dom
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // React
 import { useState, useEffect, useContext } from "react";
 // Socket
@@ -27,9 +27,6 @@ import { API } from "../config/api";
 let socket;
 
 function Profile() {
-  // Navigate
-  const navigate = useNavigate();
-
   // Id
   const { id } = useParams();
 
@@ -174,7 +171,7 @@ function Profile() {
 
       socket.emit("send message", data);
       e.target.value = "";
-      navigate("/message");
+      handleClose();
     }
   };
 

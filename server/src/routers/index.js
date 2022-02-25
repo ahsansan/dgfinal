@@ -17,6 +17,7 @@ const {
 } = require("../controllers/user");
 const {
   addFeed,
+  deleteFeed,
   followingFeeds,
   feeds,
   likeFeed,
@@ -49,6 +50,7 @@ router.delete("/unfollow/:id", unfollow);
 router.patch("/follow", addFollow);
 router.post("/feed", auth, uploadFile("fileName"), addFeed);
 router.get("/feed/:id", auth, followingFeeds);
+router.delete("/feed/:id", auth, deleteFeed);
 router.get("/detail-feed/:id", detailFeed);
 router.get("/feeds", auth, feeds);
 router.get("/like/:id", getLike);

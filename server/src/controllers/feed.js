@@ -1,5 +1,6 @@
 // memanggil model tabel database
 const { tbUser, tbFeed, tbFollow, tbLike, tbComment } = require("../../models");
+const fs = require("fs");
 
 // joi
 const joi = require("joi");
@@ -30,6 +31,43 @@ exports.addFeed = async (req, res) => {
     res.status(500).send({
       status: "failed",
       message: "Server error",
+    });
+  }
+};
+
+exports.deleteFeed = async (req, res) => {
+  try {
+    const feedId = req.params.id;
+
+    const findFeed = await tbFeed.findOne({
+      where: {
+        id: feedId,
+      },
+    });
+
+    if (!feedId) {
+      res.status(403).send({
+        status: "failed",
+      });
+    }
+
+    fs.unlink(`uploads/${findFeed.fileName}`, (err) => {
+      console.log(err);
+    });
+
+    await tbFeed.destroy({
+      where: {
+        id: feedId,
+      },
+    });
+
+    res.status(200).send({
+      status: "success",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      status: "failed",
     });
   }
 };
