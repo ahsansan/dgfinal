@@ -44,7 +44,7 @@ exports.uploadFile = (imageFile) => {
       }
       //   Jika tidak upload gambar
       if (!req.file && !err) {
-        return req.status(400).send({
+        return res.status(400).send({
           message: "Silahkan upload file photo mu",
         });
       }

@@ -15,6 +15,13 @@ module.exports = (sequelize, DataTypes) => {
           name: "idUser",
         },
       });
+
+      tbFeed.hasMany(models.tbLike, {
+        as: "likers",
+        foreignKey: {
+          name: "idFeed",
+        },
+      });
     }
   }
   tbFeed.init(
@@ -22,7 +29,6 @@ module.exports = (sequelize, DataTypes) => {
       fileName: DataTypes.STRING,
       caption: DataTypes.STRING,
       idUser: DataTypes.INTEGER,
-      like: DataTypes.INTEGER,
     },
     {
       sequelize,

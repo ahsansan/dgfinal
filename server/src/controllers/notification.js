@@ -1,5 +1,6 @@
 // Model tabel message
 const { tbNotification, tbUser } = require("../../models");
+const { Op } = require("sequelize");
 
 exports.addNotif = async (req, res) => {
   try {
@@ -31,7 +32,14 @@ exports.getNotif = async (req, res) => {
 
     const data = await tbNotification.findAll({
       where: {
-        idReceiver: id,
+        [Op.and]: [
+          { idReceiver: id },
+          {
+            idSender: {
+              [Op.not]: [id],
+            },
+          },
+        ],
       },
       include: {
         model: tbUser,

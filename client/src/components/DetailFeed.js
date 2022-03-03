@@ -91,8 +91,8 @@ function DetailFeed({ show, handleClose, feedsId, showFeedFollow }) {
 
   const loadLike = async () => {
     try {
-      const response = await API.get(`/like/${state.user.id}`);
-      setLikeUser(response.data.like);
+      const response = await API.get(`/like/${feedsId.id}`);
+      setLikeUser(response.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -100,7 +100,7 @@ function DetailFeed({ show, handleClose, feedsId, showFeedFollow }) {
 
   const likeFilter = async () => {
     try {
-      const find = likeUser.find((data) => data.idFeed == feedsId.id);
+      const find = likeUser.find((data) => data.idUser == state.user.id);
       if (find) {
         setLike(true);
       } else {
@@ -289,7 +289,7 @@ function DetailFeed({ show, handleClose, feedsId, showFeedFollow }) {
                   </div>
                 )}
                 <div className="likers">
-                  <p>{feedsId.like} Like</p>
+                  <p>{likeUser.length} Likes</p>
                 </div>
                 <div className="kolom-komentar">
                   <input

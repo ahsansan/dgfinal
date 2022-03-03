@@ -49,18 +49,6 @@ function Feed() {
   // order feed
   feedFollow.reverse();
 
-  // Like
-  const [likeUser, setLikeUser] = useState([]);
-
-  const loadLike = async () => {
-    try {
-      const response = await API.get(`/like/${state.user.id}`);
-      setLikeUser(response.data.like);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleLike = (event) => {
     const id = event.target.getAttribute("content");
     like(id);
@@ -81,16 +69,10 @@ function Feed() {
       await API.post("/notif", notif, headers);
 
       showFeedFollow();
-      loadLike();
     } catch (error) {
       console.log(error);
     }
   };
-
-  // Load loadLike
-  useEffect(() => {
-    loadLike();
-  }, []);
 
   // Load loadFeedFollow
   useEffect(() => {
@@ -129,9 +111,16 @@ function Feed() {
                   </p>
                 </div>
                 <div className="icon-container">
-                  {feed.like ? (
+                  {feed.likers.find((x) => x.idUser === state.user.id) ? (
                     <FontAwesomeIcon
                       className="card-icon text-danger"
+                      onClick={handleLike}
+                      icon={faHeart}
+                      content={feed.id}
+                    />
+                  ) : feed.likers.length === 0 ? (
+                    <FontAwesomeIcon
+                      className="card-icon"
                       onClick={handleLike}
                       icon={faHeart}
                       content={feed.id}
@@ -155,7 +144,7 @@ function Feed() {
             </div>
             <div className="navlike">
               <div>
-                <p className="like-total">{feed.like} Like</p>
+                <p className="like-total">{feed.likers.length} Likes</p>
               </div>
             </div>
           </div>

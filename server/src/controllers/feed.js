@@ -105,13 +105,19 @@ exports.followingFeeds = async (req, res) => {
           include: {
             model: tbFeed,
             as: "feed",
-            include: {
-              model: tbUser,
-              as: "user",
-              attributes: {
-                exclude: ["updatedAt", "bio", "password", "email"],
+            include: [
+              {
+                model: tbUser,
+                as: "user",
+                attributes: {
+                  exclude: ["updatedAt", "bio", "password", "email"],
+                },
               },
-            },
+              {
+                model: tbLike,
+                as: "likers",
+              },
+            ],
             order: [["createdAt", "DESC"]],
             attributes: {
               exclude: ["updatedAt", "followers", "followings", "idUser"],
@@ -166,13 +172,19 @@ exports.feeds = async (req, res) => {
   try {
     // Menampilkan semua data
     let allfeed = await tbFeed.findAll({
-      include: {
-        model: tbUser,
-        as: "user",
-        attributes: {
-          exclude: ["createdAt", "updatedAt", "bio", "password", "email"],
+      include: [
+        {
+          model: tbUser,
+          as: "user",
+          attributes: {
+            exclude: ["updatedAt", "bio", "password", "email"],
+          },
         },
-      },
+        {
+          model: tbLike,
+          as: "likers",
+        },
+      ],
       order: [["id", "DESC"]],
       attributes: {
         exclude: ["createdAt", "updatedAt"],
@@ -259,17 +271,6 @@ exports.likeFeed = async (req, res) => {
         },
       });
 
-      // menambhkan 1 dan update like feed
-      const likes = datas.like - 1;
-      await tbFeed.update(
-        { like: likes },
-        {
-          where: {
-            id: id,
-          },
-        }
-      );
-
       res.status(200).send({
         status: "success",
         id,
@@ -321,7 +322,7 @@ exports.getLike = async (req, res) => {
 
     const likes = await tbLike.findAll({
       where: {
-        idUser: id,
+        idFeed: id,
       },
     });
 
@@ -334,7 +335,7 @@ exports.getLike = async (req, res) => {
 
     res.send({
       status: "success",
-      like: likes,
+      data: likes,
     });
   } catch (error) {
     console.log(error);
@@ -419,13 +420,19 @@ exports.getFeed = async (req, res) => {
       where: {
         idUser: id,
       },
-      include: {
-        model: tbUser,
-        as: "user",
-        attributes: {
-          exclude: ["createdAt", "updatedAt", "bio", "password", "email"],
+      include: [
+        {
+          model: tbUser,
+          as: "user",
+          attributes: {
+            exclude: ["updatedAt", "bio", "password", "email"],
+          },
         },
-      },
+        {
+          model: tbLike,
+          as: "likers",
+        },
+      ],
       order: [["id", "DESC"]],
       attributes: {
         exclude: ["createdAt", "updatedAt", "password"],
