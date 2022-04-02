@@ -70,7 +70,7 @@ function App() {
   return (
     <Routes>
       {/* landing page */}
-      <Route exact path="/" exact element={<LandingPage />} />
+      <Route exact path="/" element={<LandingPage />} />
       <Route exact path="/feed" element={<FeedPage />} />
       <Route exact path="/explore" element={<ExplorePage />} />
       <Route exact path="/profile/:id" element={<ProfilePage />} />

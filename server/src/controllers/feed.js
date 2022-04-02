@@ -45,7 +45,7 @@ exports.deleteFeed = async (req, res) => {
       },
     });
 
-    if (!feedId) {
+    if (!findFeed) {
       res.status(403).send({
         status: "failed",
       });
@@ -118,12 +118,11 @@ exports.followingFeeds = async (req, res) => {
                 as: "likers",
               },
             ],
-            order: [["createdAt", "DESC"]],
+            order: [["id", "DESC"]],
             attributes: {
               exclude: ["updatedAt", "followers", "followings", "idUser"],
             },
           },
-          order: [["id", "DESC"]],
           attributes: {
             exclude: [
               "password",
